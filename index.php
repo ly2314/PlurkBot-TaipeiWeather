@@ -5,19 +5,20 @@
     $output = curl_exec($ch);
     curl_close($ch);   
 	$raw = json_decode(json_encode((array) simplexml_load_string($output)), 1);
-	$data = '';
-	$index = 0;
-	foreach ($raw['dataset']['parameterSet']['parameter'] as $item)
-	{
-		++$index;
-		if ($index == 2)
-			continue;
-		$data = $data.$item['parameterValue']."\r\n";
-	}
 
 	include("plurk.php");
 	$qulifier = 'says';
-	$message = $data;
+	$message = array_values($raw['dataset']['parameterSet']['parameter'])[0]['parameterValue'];
 	$post_info = do_action("http://www.plurk.com/APP/Timeline/plurkAdd", array("content" => rawurlencode($message), "qualifier" => $qulifier));
 	print_r($post_info);
+	$plurk_id = $post_info['plurk_id'];
+	$id = 0;
+	foreach ($raw['dataset']['parameterSet']['parameter'] as $item)
+	{
+		++$id;
+		if ($id == 1)
+			continue;
+		$post_info = do_action("http://www.plurk.com/APP/Responses/responseAdd", array("content" => rawurlencode($item['parameterValue']), "qualifier" => $qulifier, "plurk_id" => $plurk_id));
+		print_r($post_info);
+	}
 ?>
