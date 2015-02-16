@@ -8,4 +8,8 @@ Here is the bot account on Plurk: http://www.plurk.com/taipei_weather
 3. Register a Plurk App and retrieve the App Key and App Secret.
 4. Edit plurk.php.sample, enter your App Key, App Secret, User Token and User Token Secret.
 5. Rename plurk.php.sample to plurk.php.
-6. View your index.php on the browser, and a new plurk should be added.
+6. Add cron jobs as following.
+
+## Cron Jobs
+- now.php: This file adds new plurk that indicates the weather status right now. Execute this file once an hour.
+- helper.php: This file adds new plurk that indicates weather forast. Execute this every 12 hours.
