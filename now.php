@@ -1,12 +1,10 @@
 <?php
-    $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL, "http://opendata.cwb.gov.tw/opendata/DIV2/O-A0003-001.xml");
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-    $output = curl_exec($ch);
-    curl_close($ch);   
-    $raw = json_decode(json_encode((array) simplexml_load_string($output)), 1);
-    $message = '台北市現在氣溫';
-    foreach ($raw['location'] as $item)
+    include("plurk.php");
+    date_default_timezone_set("Asia/Taipei");
+    $raw = getData("http://opendata.cwb.gov.tw/opendata/DIV2/O-A0003-001.xml");
+    $message = '現在時刻：'.date("A g").":00。\r\n台北市現在氣溫";
+    echo $message;
+   foreach ($raw['location'] as $item)
     {
         if ($item['stationId'] != '466920')
             continue;
@@ -35,8 +33,9 @@
             }
         }
     }
-    include("plurk.php");
+    $img_raw = getData("http://opendata.cwb.gov.tw/opendata/MSC/O-B0029-003.xml");
+    $img_url = uploadImage($img_raw['dataset']['resource']['uri']);
     $qulifier = 'says';
-    $post_info = do_action("http://www.plurk.com/APP/Timeline/plurkAdd", array("content" => rawurlencode($message), "qualifier" => $qulifier, "lang" => 'tr_ch'));
+    $post_info = do_action("http://www.plurk.com/APP/Timeline/plurkAdd", array("content" => rawurlencode($img_url."\r\n".$message), "qualifier" => $qulifier, "lang" => 'tr_ch'));
     print_r($post_info);
 ?>
