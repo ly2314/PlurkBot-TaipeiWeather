@@ -13,3 +13,4 @@ Here is the bot account on Plurk: http://www.plurk.com/taipei_weather
 ## Cron Jobs
 - now.php: This file adds new plurk that indicates the weather status right now. Execute this file once an hour.
 - helper.php: This file adds new plurk that indicates weather forast. Execute this every 12 hours.
+- bing.php: This file adds new plurk of Bing Wallpaper.
