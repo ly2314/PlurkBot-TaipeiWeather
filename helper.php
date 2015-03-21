@@ -4,7 +4,7 @@
     $raw = getData("http://opendata.cwb.gov.tw/opendata/MFC/F-C0032-009.xml");
     $qulifier = 'says';
 
-    $message = array_values($raw['dataset']['parameterSet']['parameter'])[0]['parameterValue'];
+    $message = array_values($raw['dataset']['parameterSet']['parameter'])[0]['parameterValue']."\r\n#天氣小幫手";
 
     $post_info = do_action("http://www.plurk.com/APP/Timeline/plurkAdd", array("content" => rawurlencode($message), "qualifier" => $qulifier, "lang" => 'tr_ch'));
     print_r($post_info);
