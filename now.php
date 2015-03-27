@@ -1,9 +1,12 @@
 <?php
-    include("plurk.php");
+    include("functions.php");
+    if (!CheckAuthorization())
+    {
+        exit;
+    }
     date_default_timezone_set("Asia/Taipei");
     $raw = getData("http://opendata.cwb.gov.tw/opendata/DIV2/O-A0003-001.xml");
     $message = '現在時刻：'.date("A g").":00。\r\n台北市現在氣溫";
-    echo $message;
     foreach ($raw['location'] as $item)
     {
         if ($item['stationId'] != '466920')

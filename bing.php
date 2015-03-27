@@ -10,7 +10,11 @@
         return $raw;
     }
 
-    include("plurk.php");
+    include("functions.php");
+    if (!CheckAuthorization())
+    {
+        exit;
+    }
     date_default_timezone_set("Asia/Taipei");
     $raw = getBingData("http://www.bing.com/HPImageArchive.aspx?format=xml&idx=0&n=1");
     $img_url = uploadImage('http://www.bing.com/'.$raw['image']['urlBase'].'_1920x1080.jpg');

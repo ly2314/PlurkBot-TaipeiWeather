@@ -1,5 +1,20 @@
 <?php
-    set_time_limit(0); 
+    set_time_limit(0);
+
+    function CheckAuthorization()
+    {
+        $headers = getallheaders();
+        if (isset($headers['Authorization']))
+        {
+            include('config.php');
+            if ($headers['Authorization'] == $auth_token)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
     function getData($url)
     {
         $ch = curl_init();
@@ -13,10 +28,11 @@
 
     function do_action($url, $new_parms=array())
     {
-        $oauth_consumer_key = YOUR_PLURK_APP_KEY;
-        $oauth_consumer_secret = YOUR_PLURK_APP_SECRET;
-        $oauth_token = PLURK_USER_TOKEN;
-        $oauth_token_secret = PLURK_USER_TOKEN_SECRET;   
+        include('config.php');
+        $oauth_consumer_key = $plurk_app_key;
+        $oauth_consumer_secret = $plurk_app_secret;
+        $oauth_token = $plurk_oauth_token;
+        $oauth_token_secret = $plurk_oauth_secret;   
         $oauth_nonce = rand(10000000,99999999);     
         $oauth_timestamp = time();
         $parm_array = array("oauth_consumer_key" => $oauth_consumer_key,
@@ -42,12 +58,13 @@
         $data = curl_exec($ch);
 
         curl_close($ch);
-        return json_decode($data,TRUE);
+        return json_decode($data, TRUE);
     }
 
     function uploadImage($imageUrl)
     {
-        $client_id = IMGUR_API_KEY;
+        include('config.php');
+        $client_id = $imgur_app_key;
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, 'https://api.imgur.com/3/image.json?time='.time());
         curl_setopt($ch, CURLOPT_POST, TRUE);

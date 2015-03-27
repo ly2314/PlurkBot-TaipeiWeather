@@ -1,5 +1,9 @@
 <?php 
-    include("plurk.php");
+    include("functions.php");
+    if (!CheckAuthorization())
+    {
+        exit;
+    }
 
     $raw = getData("http://opendata.cwb.gov.tw/opendata/MFC/F-C0032-009.xml");
     $qulifier = 'says';
