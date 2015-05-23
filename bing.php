@@ -18,7 +18,6 @@
     date_default_timezone_set("Asia/Taipei");
     $raw = getBingData("http://www.bing.com/HPImageArchive.aspx?format=xml&idx=0&n=1");
     $img_url = uploadImage('http://www.bing.com/'.$raw['image']['urlBase'].'_1920x1080.jpg');
-    $date = date_create_from_format('Ymd', $raw['image']['startdate']);
     $message = $img_url."\r\nBing 每日桌布\r\n".$raw['image']['copyright']."\r\n#Bing每日桌布";
     $qulifier = 'shares';
     $post_info = do_action("http://www.plurk.com/APP/Timeline/plurkAdd", array("content" => rawurlencode($message), "qualifier" => $qulifier, "lang" => 'tr_ch'));
