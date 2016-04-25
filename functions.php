@@ -60,29 +60,6 @@
         curl_close($ch);
         return json_decode($data, TRUE);
     }
-    
-    function uploadImageFromFile($imageUrl)
-    {
-        include('config.php');
-        $client_id = $imgur_app_key;
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $imageUrl);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        $img = curl_exec($ch);
-        curl_close($ch);
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, 'https://api.imgur.com/3/image.json?time='.time());
-        curl_setopt($ch, CURLOPT_POST, TRUE);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Authorization: Client-ID ' . $client_id));
-        curl_setopt($ch, CURLOPT_POSTFIELDS, array('image' => $img));
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-        $reply = curl_exec($ch);
-        echo curl_error($ch);
-        curl_close($ch);
-        $reply = json_decode($reply, TRUE);
-        return $reply['data']['link'];
-    }
 
     function uploadImage($imageUrl)
     {

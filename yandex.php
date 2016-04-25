@@ -6,7 +6,7 @@
     }
     
     date_default_timezone_set("Asia/Taipei");
-    $img_url = uploadImageFromFile('http://yandex.ru/images/today');
+    $img_url = uploadImage('http://yandex.ru/images/today');
     
     $url = "https://www.yandex.com/images/?uinfo=sw-1920-sh-1080-ww-1920-wh-695-pd-1-wp-16x9_1920x1080";
     $ch = curl_init();
