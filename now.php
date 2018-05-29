@@ -39,6 +39,6 @@
     $img_raw = getData("http://opendata.cwb.gov.tw/opendata/MSC/O-B0029-003.xml");
     $img_url = uploadImage($img_raw['dataset']['resource']['uri']);
     $qulifier = 'says';
-    $post_info = do_action("http://www.plurk.com/APP/Timeline/plurkAdd", array("content" => rawurlencode($img_url."\r\n".$message), "qualifier" => $qulifier, "lang" => 'tr_ch'));
+    $post_info = do_action("https://www.plurk.com/APP/Timeline/plurkAdd", array("content" => rawurlencode($img_url."\r\n".$message), "qualifier" => $qulifier, "lang" => 'tr_ch'));
     print_r($post_info);
 ?>

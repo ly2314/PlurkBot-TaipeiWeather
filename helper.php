@@ -10,7 +10,7 @@
 
     $message = array_values($raw['dataset']['parameterSet']['parameter'])[0]['parameterValue']."\r\n#天氣小幫手";
 
-    $post_info = do_action("http://www.plurk.com/APP/Timeline/plurkAdd", array("content" => rawurlencode($message), "qualifier" => $qulifier, "lang" => 'tr_ch'));
+    $post_info = do_action("https://www.plurk.com/APP/Timeline/plurkAdd", array("content" => rawurlencode($message), "qualifier" => $qulifier, "lang" => 'tr_ch'));
     print_r($post_info);
 
     $plurk_id = $post_info['plurk_id'];
@@ -20,6 +20,6 @@
         ++$id;
         if ($id == 1)
             continue;
-        $post_info = do_action("http://www.plurk.com/APP/Responses/responseAdd", array("content" => rawurlencode($item['parameterValue']), "qualifier" => $qulifier, "plurk_id" => $plurk_id, "lang" => 'tr_ch'));
+        $post_info = do_action("https://www.plurk.com/APP/Responses/responseAdd", array("content" => rawurlencode($item['parameterValue']), "qualifier" => $qulifier, "plurk_id" => $plurk_id, "lang" => 'tr_ch'));
     }
 ?>

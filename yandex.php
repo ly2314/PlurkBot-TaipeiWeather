@@ -43,10 +43,10 @@
     $message = $img_url."\r\nYandex每日桌布\r\n**".$author."**\r\n#Yandex每日桌布";
     $qulifier = 'shares';
     print_r($message);
-    $post_info = do_action("http://www.plurk.com/APP/Timeline/plurkAdd", array("content" => rawurlencode($message), "qualifier" => $qulifier, "lang" => 'tr_ch'));
+    $post_info = do_action("https://www.plurk.com/APP/Timeline/plurkAdd", array("content" => rawurlencode($message), "qualifier" => $qulifier, "lang" => 'tr_ch'));
     print_r($post_info);    
     
     $plurk_id = $post_info['plurk_id'];
     print_r($description);
-    $post_info = do_action("http://www.plurk.com/APP/Responses/responseAdd", array("content" => rawurlencode($description), "qualifier" => $qulifier, "plurk_id" => $plurk_id, "lang" => 'tr_ch'));
+    $post_info = do_action("https://www.plurk.com/APP/Responses/responseAdd", array("content" => rawurlencode($description), "qualifier" => $qulifier, "plurk_id" => $plurk_id, "lang" => 'tr_ch'));
 ?>
